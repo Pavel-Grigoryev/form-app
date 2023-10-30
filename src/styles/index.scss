@@ -1,0 +1,245 @@
+@import 'reset';
+@import 'variables/colors';
+@import 'variables/typography';
+@import 'variables/breakpoints';
+@import 'variables/blocks';
+@import 'intl-tel-input/build/css/intlTelInput.css';
+
+body {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  user-select: none;
+  box-sizing: border-box;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  overflow-x: hidden;
+}
+
+h2 {
+  font-size: var(--font-size-l);
+  letter-spacing: var(--font-spacing-l);
+  line-height: var(--line-height-l);
+  font-weight: var(--font-weight-bold);
+}
+
+.header {
+  background-color: var(--color-primary);
+  min-height: $height-header;
+
+  .header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header__title {
+    color: var(--color-secodary);
+  }
+
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 36px;
+
+  @media screen and (max-width: $md) {
+    padding: 0 16px;
+  }
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+
+.main {
+  height: calc(100vh - $height-header);
+
+
+  .main__popup {
+    position: sticky;
+    top: 20px;
+    margin: 0 auto 20px;
+    transform: translateY(-300px);
+    max-width: 280px;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-secodary);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0.3s ease-in, opacity 0.3s ease-in, transform 0.5s ease-in;
+  }
+
+  .main__popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .main__popup.error {
+    color: var(--color-error);
+    border-color: var(--color-error);
+  }
+
+  .main__wrapper {
+    padding: 50px 0;
+
+    @media screen and (max-width: $md) {
+      padding: 30px 0;
+    }
+  }
+
+  .button {
+    padding: 20px 40px;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 30px;
+    transition: background-color 0.3s ease-in;
+    color: var(--color-secodary);
+
+    &:hover {
+      background-color: var(--color-third);
+    }
+  }
+
+  .main__singUp-block {
+    position: relative;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 400px;
+    border: 1px solid var(--color-primary);
+    border-radius: 10px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background: var(--color-fourth) url("../assets/images/loading.svg") center no-repeat;
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 0.3s ease-in, opacity 0.3s ease-in;
+    }
+
+    &.loading::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.form {
+  .form__title {
+    text-align: center;
+  }
+
+  .form__block {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+
+  .form__field {
+    position: relative;
+  }
+
+  .form__label {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 32px 10px 25px;
+    color: var(--color-text);
+    transition: padding .3s ease, color .3s ease, top .3s ease;
+  }
+
+  .form__input {
+    padding: 31px 10px 18px;
+    width: 100%;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    border-bottom-color: var(--color-text);
+    outline: 0;
+    transition: padding .3s ease, color .3s ease, border .3s ease, border-radius .3s ease, margin .3s ease;
+
+    &.error {
+      border-bottom-color: var(--color-error);
+    }
+
+    &:not([data-name="phone"])::placeholder {
+      color: transparent;
+    }
+
+    &:focus {
+      box-shadow: none !important;
+      border-color: var(--color-primary);
+      border-radius: 4px;
+      padding-top: 20px;
+      margin-top: 11px;
+    }
+
+    &.error:focus {
+      border-color: var(--color-error);
+    }
+
+    &:focus ~ label,
+    &:not(:placeholder-shown) ~ label, &:focus + .form__label {
+      top: -40px;
+      font-size: 14px;
+    }
+  }
+
+  textarea.form__input {
+    resize: none;
+  }
+
+  .form__error {
+    position: absolute;
+    bottom: -18px;
+    left: 10px;
+    font-size: 14px;
+    color: var(--color-error);
+  }
+
+  .form__button {
+    margin-top: 20px;
+  }
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+}
+
+.modal__button {
+  margin: 30px;
+}
+
+// Phone Input Styles
+
+.iti {
+  width: 100%;
+
+  & input:focus {
+    margin-top: 11px !important;
+  }
+}
+
+
+.iti--separate-dial-code .iti__selected-flag {
+  background-color: transparent;
+}
+
+.iti__flag-container {
+  top: 10px;
+}
+
+// End Phone Input Styles

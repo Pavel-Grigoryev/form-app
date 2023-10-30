@@ -1,3 +1,6 @@
-import { someFn } from './test'
+import "./styles/index.scss";
+import "./js/formValidate";
+import "./js/telInput";
+import "./js/showModal"
 
-someFn();
+
